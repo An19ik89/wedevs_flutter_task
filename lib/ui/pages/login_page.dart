@@ -171,31 +171,6 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             )),
                             SizedBox(height: 30,),
-                            // GetX<HomeController>(
-                            //   builder: (_){
-                            //     _.post = Get.find<HomeController>().post;
-                            //     return new InkWell(
-                            //       child: FadeAnimation(2, Container(
-                            //         height: 50,
-                            //         decoration: BoxDecoration(
-                            //             borderRadius: BorderRadius.circular(10),
-                            //             gradient: LinearGradient(
-                            //                 colors: [
-                            //                   Color.fromRGBO(143, 148, 251, 1),
-                            //                   Color.fromRGBO(143, 148, 251, .6),
-                            //                 ]
-                            //             )
-                            //         ),
-                            //         child: Center(
-                            //           child: Text("Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-                            //         ),
-                            //       )),
-                            //       onTap: (){
-                            //         _.post = Get.find<HomeController>().getLogin();
-                            //       },
-                            //     );
-                            //   },
-                            // ),
                             new InkWell(
                               child: FadeAnimation(2, Container(
                                 height: 50,
@@ -233,7 +208,7 @@ class _LoginPageState extends State<LoginPage> {
                               },
                             ),
                             SizedBox(height: 70,),
-                            InkWell(
+                            new InkWell(
                                 child: FadeAnimation(1.5,
                                     Text("Sign Up?", style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),)),
                               onTap: (){

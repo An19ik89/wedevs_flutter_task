@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:wedevs_flutter_task/data/model/user_model.dart';
 import 'package:wedevs_flutter_task/data/repository/login_repository.dart';
+import 'package:wedevs_flutter_task/routes/app_routes.dart';
 
 class LoginController extends GetxController {
   final LoginRepository loginRepository = LoginRepository();
@@ -22,6 +23,7 @@ class LoginController extends GetxController {
   void login() async {
     loginProcess(true);
     try {
+      print(emailTextController.text);
       userLoggedInInfo = await loginRepository.signInWithEmailAndPassword(
           email: emailTextController.text,
           password: passwordTextController.text);
@@ -34,6 +36,10 @@ class LoginController extends GetxController {
           userInfo.write('user_nicename', userLoggedInInfo!.userNicename);
           userInfo.write(
               'user_display_name', userLoggedInInfo!.userDisplayName);
+          userInfo.write(
+              'SignIn',true);
+
+          Get.toNamed(Routes.PROFILE);
         }
       }
     } finally {

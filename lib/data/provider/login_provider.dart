@@ -22,7 +22,7 @@ class LoginApiClient{
       //encode Map to JSON
       var body = json.encode(data);
       var response = await http.post(url,
-          headers: {"Content-Type": "application/x-www-form-urlencoded"},
+          headers: {"Content-Type": "application/json"},
           body: body
       );
       print("rsponse body : ${response.statusCode}");
