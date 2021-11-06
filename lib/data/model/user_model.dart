@@ -1,27 +1,33 @@
+import 'dart:convert';
 
+UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
 
+String userModelToJson(UserModel data) => json.encode(data.toJson());
 
-class User {
+class UserModel {
+  UserModel({
+    this.token,
+    this.userEmail,
+    this.userNicename,
+    this.userDisplayName,
+  });
 
-  String? id;
-  String? name;
-  String? email;
-  String? urlimage;
+  String? token;
+  String? userEmail;
+  String? userNicename;
+  String? userDisplayName;
 
-  User({ this.id, this.name, this.email, this.urlimage});
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+    token: json["token"],
+    userEmail: json["user_email"],
+    userNicename: json["user_nicename"],
+    userDisplayName: json["user_display_name"],
+  );
 
-  // User.fromSnapshot(FirebaseUser currentUser) :
-  //       id = currentUser.uid,
-  //       name = currentUser.displayName,
-  //       email = currentUser.email,
-  //       urlimage = currentUser.photoUrl;
-
-  Map<String?, dynamic> toJson(){
-    return {
-      "id": id,
-      "name": name,
-      "email": email,
-      "urlimage": urlimage,
-    };
-  }
+  Map<String, dynamic> toJson() => {
+    "token": token,
+    "user_email": userEmail,
+    "user_nicename": userNicename,
+    "user_display_name": userDisplayName,
+  };
 }

@@ -1,22 +1,18 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:html/parser.dart';
-import 'package:wedevs_flutter_task/controller/login_controller.dart';
-import 'package:wedevs_flutter_task/routes/app_routes.dart';
-import '../animation/fade_animation.dart';
+import 'package:wedevs_flutter_task/controller/sign_up_controller.dart';
+import 'package:wedevs_flutter_task/ui/animation/fade_animation.dart';
 
-
-class LoginPage extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
 
-  final LoginController loginController = Get.find<LoginController>();
+  final SignUpController signUpController = Get.find<SignUpController>();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -28,7 +24,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void dispose() {
     super.dispose();
-   loginController.dispose();
+    signUpController.dispose();
+
   }
 
 
@@ -41,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Obx(()
           {
 
-            if (loginController.loginProcess.value) {
+            if (signUpController.signUpProcess.value) {
               return new Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
@@ -108,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: FadeAnimation(1.6, Container(
                               margin: EdgeInsets.only(top: 50),
                               child: Center(
-                                child: Text("Login", style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),),
+                                child: Text("Sign Up", style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),),
                               ),
                             )),
                           )
@@ -142,12 +139,12 @@ class _LoginPageState extends State<LoginPage> {
                                         border: Border(bottom: BorderSide(color: Colors.grey.shade100))
                                     ),
                                     child: TextFormField(
-                                      controller: loginController.emailTextController,
-                                      keyboardType: TextInputType.emailAddress,
+                                      controller: signUpController.usernameTextController,
+                                      keyboardType: TextInputType.text,
                                       autofocus: false,
                                       decoration: InputDecoration(
                                           border: InputBorder.none,
-                                          hintText: "User Name",
+                                          hintText: "User name",
                                           hintStyle: TextStyle(color: Colors.grey[400])
                                       ),
                                       validator: (String? value) => value!.trim().isEmpty ? "Username is require" : null,
@@ -155,8 +152,25 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                   Container(
                                     padding: EdgeInsets.all(8.0),
+                                    decoration: BoxDecoration(
+                                        border: Border(bottom: BorderSide(color: Colors.grey.shade100))
+                                    ),
                                     child: TextFormField(
-                                      controller: loginController.passwordTextController,
+                                      controller: signUpController.emailTextController,
+                                      keyboardType: TextInputType.emailAddress,
+                                      autofocus: false,
+                                      decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: "Email",
+                                          hintStyle: TextStyle(color: Colors.grey[400])
+                                      ),
+                                      validator: (String? value) => value!.trim().isEmpty ? "Email is require" : null,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: TextFormField(
+                                      controller: signUpController.passwordTextController,
                                       keyboardType: TextInputType.text,
                                       autofocus: false,
                                       decoration: InputDecoration(
@@ -209,35 +223,24 @@ class _LoginPageState extends State<LoginPage> {
                                     )
                                 ),
                                 child: Center(
-                                  child: Text("Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                                  child: Text("Sign Up", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                                 ),
                               )),
                               onTap: () async{
                                 if(_formKey.currentState!.validate())
                                 {
-                                  loginController.login();
-
-
-                                  // String? error = await loginController.loginTokenApi(
-                                  //     email: emailController.text,
-                                  //     password: passwordController.text);
-                                  // print("error : $error");
-                                  // String middleText = error!;
-                                  // if (middleText != "" || middleText == null) {
-                                  //   Get.defaultDialog(
-                                  //       title: "Oop!", middleText: _parseHtmlString(middleText));
-                                  // }
-
+                                  signUpController.signUp();
 
                                 }
                               },
                             ),
                             SizedBox(height: 70,),
+
                             InkWell(
-                                child: FadeAnimation(1.5,
-                                    Text("Sign Up?", style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),)),
+                              child: FadeAnimation(1.5,
+                                  Text("Already Signed Up?", style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),)),
                               onTap: (){
-                                  Get.toNamed(Routes.SIGNUP);
+                                Get.back();
                               },
                             ),
                           ],
@@ -252,7 +255,5 @@ class _LoginPageState extends State<LoginPage> {
         )
     );
   }
+
 }
-
-
-
