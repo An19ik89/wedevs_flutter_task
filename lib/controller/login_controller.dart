@@ -46,6 +46,7 @@ class LoginController extends GetxController {
           userInfo.write('first_name', model!.firstName);
           userInfo.write('last_name', model.lastName);
           userInfo.write('id', model.id);
+          Get.deleteAll();
           Get.toNamed(Routes.PROFILE);
         }
       }

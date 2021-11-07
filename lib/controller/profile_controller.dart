@@ -83,6 +83,7 @@ class ProfileController extends GetxController
         userInfo.remove('first_name');
         userInfo.remove('last_name');
         userInfo.write('SignIn',false);
+        Get.deleteAll();
         Get.toNamed(Routes.INITIAL);
 
     }
