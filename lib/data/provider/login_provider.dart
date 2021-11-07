@@ -25,6 +25,7 @@ class LoginApiClient{
       );
       if (response.statusCode == 200) {
         final responseJson = json.decode(response.body);
+        //print("after logged in: $responseJson");
         UserModel userModel = UserModel.fromJson(responseJson);
         return userModel;
       } else
@@ -34,8 +35,7 @@ class LoginApiClient{
         Get.defaultDialog(title: "Oops!", middleText: _parseHtmlString(error));
       }
     } catch (e) {
-      print(e);
-
+      e.printError();
     }
   }
 
@@ -53,6 +53,7 @@ class LoginApiClient{
       if (response.statusCode == 200)
       {
         final responseJson = json.decode(response.body);
+        //print("user details : $responseJson");
         UserModel userModel = UserModel.fromJson(responseJson);
         return userModel;
       }

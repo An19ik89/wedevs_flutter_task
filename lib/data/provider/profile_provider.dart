@@ -25,6 +25,7 @@ class ProfileApiClient{
         "email": email,
         "nickname": niceName,
       };
+      print("data : $data");
       var body = json.encode(data);
 
       var response = await http.post(url,
@@ -34,6 +35,7 @@ class ProfileApiClient{
       if (response.statusCode == 200)
       {
         final responseJson = json.decode(response.body);
+        //print("responseJson : $responseJson");
         UpdatedUserResponse userModel = UpdatedUserResponse.fromJson(responseJson);
         return userModel;
       }

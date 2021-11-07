@@ -152,7 +152,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       onTap: (){
                         profileController.logout();
                       },
-                    )
+                    ),
+                    SizedBox(height: 20.0,),
                   ],
                 );
               }
