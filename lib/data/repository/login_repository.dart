@@ -8,4 +8,8 @@ class LoginRepository {
   Future<UserModel?> signInWithEmailAndPassword({String? email,String? password}){
     return apiClient.signInWithUserNamePassword(email: email,password: password);
   }
+
+  Future<UserModel?> getUserDetails({String? token}){
+    return apiClient.getUserDetails(token: token);
+  }
 }

@@ -4,14 +4,17 @@ class TextFieldWidget extends StatefulWidget {
   final int maxLines;
   final String label;
   final String text;
-  final ValueChanged<String> onChanged;
+  //final TextEditingController? textEditingController;
+  final ValueChanged<String> onChangeds;
+
 
   const TextFieldWidget({
     Key? key,
+    //this.textEditingController,
     this.maxLines = 1,
     required this.label,
     required this.text,
-    required this.onChanged,
+    required this.onChangeds,
   }) : super(key: key);
 
   @override
@@ -24,14 +27,12 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
   @override
   void initState() {
     super.initState();
-
     controller = TextEditingController(text: widget.text);
   }
 
   @override
   void dispose() {
     controller.dispose();
-
     super.dispose();
   }
 
@@ -44,7 +45,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
       ),
       const SizedBox(height: 8),
-      TextField(
+      TextFormField(
         controller: controller,
         decoration: InputDecoration(
           border: OutlineInputBorder(
@@ -52,6 +53,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           ),
         ),
         maxLines: widget.maxLines,
+        onChanged: widget.onChangeds,
       ),
     ],
   );

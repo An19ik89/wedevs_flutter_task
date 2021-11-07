@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   final check = GetStorage();
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return new GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: check.read('SignIn') == true ? Routes.PROFILE : Routes.INITIAL,
       getPages: AppPages.Pages,

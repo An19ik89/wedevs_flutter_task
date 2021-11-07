@@ -1,45 +1,50 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:get/get.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
-import 'package:wedevs_flutter_task/data/model/user_model.dart';
+import 'package:wedevs_flutter_task/data/model/updated_user_response.dart';
+
 
 
 class ProfileApiClient{
 
-  Future<UserModel?> updateProfile ({String? email,String? name,String? password,String? id}) async
+  Future<UpdatedUserResponse?> updateProfile ({String? email,String? displayName,String? niceName,String? firstName, String? lastName, String? token}) async
   {
 
-    var url = Uri.parse('https://apptest.dokandemo.com/wp-json/wp/v2/users/');
-
+    var url = Uri.parse('https://apptest.dokandemo.com/wp-json/wp/v2/users/me');
+    String token1 = token!.replaceFirst(RegExp('"'), '');
+    String token2 = token1.replaceFirst(RegExp('"'), '');
+    String headerText = "Bearer " + token2;
     try {
+
       Map data = {
-        "username": email,
-        "password": password
+        "name": displayName,
+        "first_name": firstName,
+        "last_name": lastName,
+        "email": email,
+        "nickname": niceName,
       };
-      // print("user data : $data");
-      //encode Map to JSON
       var body = json.encode(data);
+
       var response = await http.post(url,
-          headers: {"Content-Type": "application/x-www-form-urlencoded"},
-          body: body
+        headers: {"Content-Type": "application/json",HttpHeaders.authorizationHeader: headerText},
+        body: body
       );
-      print("rsponse body : ${response.statusCode}");
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200)
+      {
         final responseJson = json.decode(response.body);
-        print("registration response : ${responseJson}");
-        UserModel userModel = UserModel.fromJson(responseJson);
+        UpdatedUserResponse userModel = UpdatedUserResponse.fromJson(responseJson);
         return userModel;
-      } else
+      }
+      else
       {
         final responseJson = json.decode(response.body);
         String error = responseJson['message'];
         Get.defaultDialog(title: "Oops!", middleText: _parseHtmlString(error));
       }
     } catch (e) {
-      print(e);
-
+      e.printError();
     }
   }
 

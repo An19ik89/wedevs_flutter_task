@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:html/parser.dart';
 import 'package:wedevs_flutter_task/controller/login_controller.dart';
 import 'package:wedevs_flutter_task/routes/app_routes.dart';
 import '../animation/fade_animation.dart';
@@ -28,7 +26,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void dispose() {
     super.dispose();
-   loginController.dispose();
+    loginController.passwordTextController.dispose();
+    loginController.emailTextController.dispose();
+    loginController.dispose();
+
   }
 
 
@@ -191,18 +192,6 @@ class _LoginPageState extends State<LoginPage> {
                                 if(_formKey.currentState!.validate())
                                 {
                                   loginController.login();
-
-
-                                  // String? error = await loginController.loginTokenApi(
-                                  //     email: emailController.text,
-                                  //     password: passwordController.text);
-                                  // print("error : $error");
-                                  // String middleText = error!;
-                                  // if (middleText != "" || middleText == null) {
-                                  //   Get.defaultDialog(
-                                  //       title: "Oop!", middleText: _parseHtmlString(middleText));
-                                  // }
-
 
                                 }
                               },

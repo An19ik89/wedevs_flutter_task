@@ -28,8 +28,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +35,6 @@ class _SignUpPageState extends State<SignUpPage> {
         body: SingleChildScrollView(
           child: Obx(()
           {
-
             if (signUpController.signUpProcess.value) {
               return new Container(
                 width: MediaQuery.of(context).size.width,
@@ -185,31 +182,6 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                             )),
                             SizedBox(height: 30,),
-                            // GetX<HomeController>(
-                            //   builder: (_){
-                            //     _.post = Get.find<HomeController>().post;
-                            //     return new InkWell(
-                            //       child: FadeAnimation(2, Container(
-                            //         height: 50,
-                            //         decoration: BoxDecoration(
-                            //             borderRadius: BorderRadius.circular(10),
-                            //             gradient: LinearGradient(
-                            //                 colors: [
-                            //                   Color.fromRGBO(143, 148, 251, 1),
-                            //                   Color.fromRGBO(143, 148, 251, .6),
-                            //                 ]
-                            //             )
-                            //         ),
-                            //         child: Center(
-                            //           child: Text("Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-                            //         ),
-                            //       )),
-                            //       onTap: (){
-                            //         _.post = Get.find<HomeController>().getLogin();
-                            //       },
-                            //     );
-                            //   },
-                            // ),
                             new InkWell(
                               child: FadeAnimation(2, Container(
                                 height: 50,
@@ -230,7 +202,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                 if(_formKey.currentState!.validate())
                                 {
                                   signUpController.signUp();
-
                                 }
                               },
                             ),

@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:get/get.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
@@ -18,17 +18,13 @@ class LoginApiClient{
         "username": email,
         "password": password
       };
-      // print("user data : $data");
-      //encode Map to JSON
       var body = json.encode(data);
       var response = await http.post(url,
           headers: {"Content-Type": "application/json"},
           body: body
       );
-      print("rsponse body : ${response.statusCode}");
       if (response.statusCode == 200) {
         final responseJson = json.decode(response.body);
-        print("registration response : ${responseJson}");
         UserModel userModel = UserModel.fromJson(responseJson);
         return userModel;
       } else
@@ -40,6 +36,28 @@ class LoginApiClient{
     } catch (e) {
       print(e);
 
+    }
+  }
+
+  Future<UserModel?> getUserDetails ({String? token}) async
+  {
+
+    var url = Uri.parse('https://apptest.dokandemo.com/wp-json/wp/v2/users/me');
+    String token1 = token!.replaceFirst(RegExp('"'), '');
+    String token2 = token1.replaceFirst(RegExp('"'), '');
+    String headerText = "Bearer " + token2;
+    try {
+      var response = await http.get(url,
+          headers: {"Content-Type": "application/json",HttpHeaders.authorizationHeader: headerText},
+      );
+      if (response.statusCode == 200)
+      {
+        final responseJson = json.decode(response.body);
+        UserModel userModel = UserModel.fromJson(responseJson);
+        return userModel;
+      }
+    } catch (e) {
+      e.printError();
     }
   }
 
