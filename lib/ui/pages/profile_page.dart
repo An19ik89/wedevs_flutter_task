@@ -17,11 +17,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-  }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
     profileController.retriveData();
   }
 
@@ -67,7 +63,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         label: 'Display Name',
                         text: profileController.display_name.value,
                         onChangeds: (val) {
-                          profileController.display_name(val);
+                          profileController.display_name.value = val;
                         },
                       ),
                     ),
@@ -77,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         label: 'Email',
                         text: profileController.email.value,
                         onChangeds: (String val) {
-                          profileController.email(val);
+                          profileController.email.value =val;
                         },
                       ),
                     ),
@@ -87,7 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         label: 'Nick Name',
                         text: profileController.nice_name.value,
                         onChangeds: (val) {
-                          profileController.nice_name(val);
+                          profileController.nice_name.value =val;
                         },
                       ),
                     ),
@@ -97,7 +93,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         label: 'First Name',
                         text: profileController.first_name.value,
                         onChangeds: (val) {
-                          profileController.first_name(val);
+                          profileController.first_name.value = val;
                         },
                       ),
                     ),
@@ -107,7 +103,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         label: 'Last Name',
                         text: profileController.last_name.value,
                         onChangeds: (val) {
-                          profileController.last_name(val);
+                          profileController.last_name.value=val;
                         },
                       ),
                     ),
@@ -128,7 +124,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Text("Update", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                         ),
                       )),
-                      onTap: () async{
+                      onTap: () {
                         profileController.updateProfile();
                       },
                     ),
